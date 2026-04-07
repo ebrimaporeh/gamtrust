@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GamTrust Services - Construction Monitoring, Business Oversight, Legal Verification & More">
+  <title>GamTrust | Our Services</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-content">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="logo-text">
+        <h1>Gam<span style="color: var(--accent-gold);">Trust</span></h1>
+        <span>Investment Protection</span>
+      </div>
+    </div>
+    
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="client-hub.html">Client Hub</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    
+    <div>
+      <a href="#get-started" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-content">
+        <span class="badge">
+          <i class="fas fa-cogs"></i> Our Offerings
+        </span>
+        <h1>Comprehensive monitoring & protection</h1>
+        <p>From construction oversight to legal verification — we ensure every dalasi is accounted for.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="container">
+      <div class="services-grid" id="servicesContainer"></div>
+    </div>
+  </section>
+
+  <!-- Revenue Model Section -->
+  <section class="revenue-section bg-light">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Revenue Model at a Glance</h2>
+        <p class="section-subtitle">Transparent pricing for complete peace of mind</p>
+      </div>
+      <div class="revenue-grid" id="revenueContainer"></div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2>Ready to protect your investment?</h2>
+      <p>Join hundreds of diaspora investors who trust GamTrust for transparency and accountability.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-secondary btn-large" id="getStartedBtn">Get Started Today</button>
+        <a href="#contact" class="btn btn-outline-light btn-large">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>GamTrust</h4>
+        <p>Protecting diaspora investments across The Gambia. Transparency is our promise.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="client-hub.html">Client Hub</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contact Info</h4>
+        <ul class="footer-links">
+          <li><i class="fas fa-phone"></i> +220 123 4567</li>
+          <li><i class="fas fa-envelope"></i> protect@gamtrust.gm</li>
+          <li><i class="fas fa-map-marker-alt"></i> Fajara, The Gambia</li>
+          <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Data Protection</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 GamTrust – Diaspora Investment Protection & Monitoring. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  // Load services
+  function loadServices() {
+    const servicesContainer = document.getElementById('servicesContainer');
+    if (servicesContainer && GamTrustData.services) {
+      servicesContainer.innerHTML = GamTrustData.services.map(service => `
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="${getIconClass(service.icon)}"></i>
+          </div>
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
+          <ul class="service-features">
+            ${service.features.map(feature => `<li><i class="fas fa-check-circle"></i> ${feature}</li>`).join('')}
+          </ul>
+          <a href="#contact" class="service-link">Request this service <i class="fas fa-arrow-right"></i></a>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Helper function to convert emoji to Font Awesome icon
+  function getIconClass(emoji) {
+    const iconMap = {
+      '🏗️': 'fa-hard-hat',
+      '📊': 'fa-chart-line',
+      '⚖️': 'fa-gavel',
+      '🔍': 'fa-search',
+      '📹': 'fa-video',
+      '🤝': 'fa-handshake'
+    };
+    return iconMap[emoji] || 'fa-shield-alt';
+  }
+
+  // Load revenue streams
+  function loadRevenue() {
+    const revenueContainer = document.getElementById('revenueContainer');
+    if (revenueContainer && GamTrustData.revenueStreams) {
+      revenueContainer.innerHTML = GamTrustData.revenueStreams.map(stream => `
+        <div class="revenue-card">
+          <div class="revenue-icon">${stream.icon}</div>
+          <h4>${stream.title}</h4>
+          <p>${stream.description}</p>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Contact button
+  document.getElementById('getStartedBtn')?.addEventListener('click', () => {
+    alert("Thank you for your interest! Our team will contact you within 24 hours to discuss your investment protection needs.");
+  });
+
+  // Initialize page
+  loadServices();
+  loadRevenue();
+</script>
+
+<style>
+  /* Page Header */
+  .page-header {
+    background: var(--off-white);
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .page-header-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .page-header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+  }
+  
+  .page-header p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  
+  /* Services Section */
+  .services-section {
+    padding: 60px 0;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 28px;
+  }
+  
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: var(--transition-base);
+  }
+  
+  .service-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-gold);
+  }
+  
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary-dark);
+    color: var(--accent-gold);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+  
+  .service-card h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+  }
+  
+  .service-card > p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .service-features {
+    list-style: none;
+    margin: 20px 0 24px;
+    padding: 0;
+  }
+  
+  .service-features li {
+    padding: 8px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .service-features li i {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    width: 18px;
+  }
+  
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+  }
+  
+  .service-link:hover {
+    color: var(--accent-gold-dark);
+    gap: 12px;
+  }
+  
+  /* Revenue Section */
+  .revenue-section {
+    padding: 60px 0;
+    background: var(--off-white);
+  }
+  
+  .section-header {
+    margin-bottom: 48px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 12px;
+  }
+  
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .revenue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  
+  .revenue-card {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    text-align: center;
+    transition: var(--transition-base);
+  }
+  
+  .revenue-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-gold);
+  }
+  
+  .revenue-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+  
+  .revenue-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+  }
+  
+  .revenue-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+  
+  /* CTA Section */
+  .cta-section {
+    background: var(--gradient-primary);
+    padding: 60px 0;
+    text-align: center;
+  }
+  
+  .cta-section h2 {
+    color: var(--white);
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  
+  .cta-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.125rem;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn-secondary {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+  }
+  
+  .btn-secondary:hover {
+    background: var(--accent-gold-light);
+    transform: translateY(-1px);
+  }
+  
+  .btn-outline-light {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+  }
+  
+  .btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--white);
+  }
+  
+  .btn-large {
+    padding: 12px 32px;
+    font-size: 1rem;
+  }
+  
+  /* Background Light */
+  .bg-light {
+    background: var(--off-white);
+  }
+  
+  /* Text Center */
+  .text-center {
+    text-align: center;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header {
+      padding: 40px 0 28px;
+    }
+    
+    .page-header h1 {
+      font-size: 2rem;
+    }
+    
+    .services-section,
+    .revenue-section,
+    .cta-section {
+      padding: 40px 0;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .service-card {
+      padding: 24px;
+    }
+    
+    .revenue-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    
+    .revenue-card {
+      padding: 20px;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+    }
+    
+    .cta-section h2 {
+      font-size: 1.75rem;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .cta-buttons .btn {
+      width: auto;
+      min-width: 200px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .page-header h1 {
+      font-size: 1.75rem;
+    }
+    
+    .page-header p {
+      font-size: 1rem;
+    }
+    
+    .service-card h3 {
+      font-size: 1.2rem;
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+    }
+    
+    .revenue-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+</body>
+</html>

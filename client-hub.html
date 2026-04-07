@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GamTrust Client Hub - Real-time project monitoring and reporting dashboard">
+  <title>GamTrust | Client Hub - Monitor Your Investments</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-content">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <div class="logo-text">
+        <h1>Gam<span style="color: var(--accent-gold);">Trust</span></h1>
+        <span>Investment Protection</span>
+      </div>
+    </div>
+    
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="client-hub.html" class="active">Client Hub</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    
+    <div>
+      <a href="#get-started" class="btn btn-primary">Get Started</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-content">
+        <span class="badge">
+          <i class="fas fa-tachometer-alt"></i> Client Dashboard
+        </span>
+        <h1>Real-time oversight dashboard</h1>
+        <p>Track your projects, view latest reports, and communicate with your local representative.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Active Project Section -->
+    <div class="dashboard-card" id="projectCard">
+      <div class="project-header">
+        <div class="project-title">
+          <i class="fas fa-building"></i>
+          <h3 id="projectName">Loading project...</h3>
+        </div>
+        <span class="project-status" id="projectStatus">Loading...</span>
+      </div>
+      <div id="projectContent"></div>
+    </div>
+
+    <!-- Quick Stats / Alerts Grid -->
+    <div class="dashboard-grid">
+      <!-- Alerts Card -->
+      <div class="info-card">
+        <div class="info-card-header">
+          <i class="fas fa-bell"></i>
+          <h3>Recent Alerts</h3>
+        </div>
+        <div id="alertsContent" class="info-card-content">Loading...</div>
+      </div>
+
+      <!-- Documents Card -->
+      <div class="info-card">
+        <div class="info-card-header">
+          <i class="fas fa-file-alt"></i>
+          <h3>Legal Documents</h3>
+        </div>
+        <div id="documentsContent" class="info-card-content">Loading...</div>
+      </div>
+
+      <!-- Schedule Call Card -->
+      <div class="info-card">
+        <div class="info-card-header">
+          <i class="fas fa-phone-alt"></i>
+          <h3>Schedule a Call</h3>
+        </div>
+        <div class="info-card-content">
+          <p>Talk with your local agent for live updates on your project.</p>
+          <button class="btn btn-outline" id="callAgentBtn">
+            <i class="fas fa-video"></i> Request Video Call
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activity Log Section -->
+    <div class="activity-card">
+      <div class="activity-header">
+        <i class="fas fa-history"></i>
+        <h3>Recent Activity</h3>
+      </div>
+      <div id="activityLog" class="activity-timeline"></div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>GamTrust</h4>
+        <p>Protecting diaspora investments across The Gambia. Transparency is our promise.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="client-hub.html">Client Hub</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Contact Info</h4>
+        <ul class="footer-links">
+          <li><i class="fas fa-phone"></i> +220 123 4567</li>
+          <li><i class="fas fa-envelope"></i> protect@gamtrust.gm</li>
+          <li><i class="fas fa-map-marker-alt"></i> Fajara, The Gambia</li>
+          <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM</li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Data Protection</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 GamTrust – Diaspora Investment Protection & Monitoring. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  // Load project information
+  function loadProject() {
+    const project = GamTrustData.sampleProject;
+    const projectNameEl = document.getElementById('projectName');
+    const projectStatusEl = document.getElementById('projectStatus');
+    const projectContent = document.getElementById('projectContent');
+    
+    if (projectNameEl) projectNameEl.textContent = project.name;
+    if (projectStatusEl) projectStatusEl.textContent = `${project.status} · ${project.progress}% complete`;
+    
+    if (projectContent) {
+      projectContent.innerHTML = `
+        <div class="update-info">
+          <div class="update-meta">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Latest update: ${project.lastUpdate}</span>
+          </div>
+          <p>${project.description}</p>
+        </div>
+        <div class="update-media">
+          <h4><i class="fas fa-paperclip"></i> Media Updates</h4>
+          <div class="media-links">
+            ${project.updates.map(update => `
+              <a href="${update.link}" class="media-link" onclick="return false;">
+                <i class="fas ${getMediaIcon(update.type)}"></i>
+                <span>${update.title}</span>
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+        <div class="inspection-section">
+          <button class="btn btn-primary" id="requestInspectionBtn">
+            <i class="fas fa-sync-alt"></i> Request Fresh Inspection
+          </button>
+          <div id="inspectionConfirm" class="inspection-confirm"></div>
+        </div>
+      `;
+    }
+    
+    // Add event listener for inspection button after DOM update
+    const inspectBtn = document.getElementById('requestInspectionBtn');
+    if (inspectBtn) {
+      inspectBtn.addEventListener('click', () => {
+        const confirmDiv = document.getElementById('inspectionConfirm');
+        confirmDiv.innerHTML = `
+          <div class="alert-success">
+            <i class="fas fa-check-circle"></i>
+            New inspection requested! Our ground agent will provide video & material verification within 24 hours.
+          </div>
+        `;
+        setTimeout(() => {
+          confirmDiv.innerHTML += `
+            <div class="alert-success" style="margin-top: 8px;">
+              <i class="fas fa-camera"></i>
+              Update: Site photos captured, no irregularities found. Report ready.
+            </div>
+          `;
+        }, 1500);
+      });
+    }
+  }
+
+  function getMediaIcon(type) {
+    const icons = {
+      'photo': 'fa-image',
+      'video': 'fa-video',
+      'drone': 'fa-drone'
+    };
+    return icons[type] || 'fa-file';
+  }
+  
+  // Load alerts
+  function loadAlerts() {
+    const alertsContent = document.getElementById('alertsContent');
+    if (alertsContent && GamTrustData.sampleProject.alerts) {
+      alertsContent.innerHTML = GamTrustData.sampleProject.alerts.map(alert => `
+        <div class="alert-item">
+          <i class="fas fa-shield-alt"></i>
+          <span>${alert}</span>
+        </div>
+      `).join('');
+    }
+  }
+  
+  // Load documents
+  function loadDocuments() {
+    const documentsContent = document.getElementById('documentsContent');
+    if (documentsContent && GamTrustData.sampleProject.documents) {
+      documentsContent.innerHTML = `
+        <div class="document-list">
+          ${GamTrustData.sampleProject.documents.map(doc => `
+            <div class="document-item">
+              <i class="fas fa-check-circle"></i>
+              <span>${doc}</span>
+            </div>
+          `).join('')}
+        </div>
+        <button class="btn btn-outline btn-sm" id="viewDocsBtn">
+          <i class="fas fa-eye"></i> View All Certificates
+        </button>
+      `;
+      
+      const viewDocsBtn = document.getElementById('viewDocsBtn');
+      if (viewDocsBtn) {
+        viewDocsBtn.addEventListener('click', () => {
+          alert("All legal documents verified and stored securely. Contact your account manager for detailed copies.");
+        });
+      }
+    }
+  }
+  
+  // Load activity log
+  function loadActivityLog() {
+    const activityLog = document.getElementById('activityLog');
+    const activities = [
+      { date: "March 15, 2026", action: "Weekly progress report sent", icon: "fa-file-alt" },
+      { date: "March 12, 2026", action: "Material delivery verified", icon: "fa-truck" },
+      { date: "March 10, 2026", action: "Site inspection completed", icon: "fa-clipboard-list" },
+      { date: "March 8, 2026", action: "Contractor meeting attended", icon: "fa-handshake" },
+      { date: "March 5, 2026", action: "Foundation inspection passed", icon: "fa-check-circle" }
+    ];
+    
+    if (activityLog) {
+      activityLog.innerHTML = activities.map(activity => `
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fas ${activity.icon}"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">${activity.date}</div>
+            <div class="timeline-action">${activity.action}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+  
+  // Call agent button
+  document.getElementById('callAgentBtn')?.addEventListener('click', () => {
+    alert("📞 Scheduling a live video call with your local GamTrust representative. You'll receive a calendar link via email within 2 hours.");
+  });
+  
+  // Initialize dashboard
+  loadProject();
+  loadAlerts();
+  loadDocuments();
+  loadActivityLog();
+</script>
+
+<style>
+  /* Page Header */
+  .page-header {
+    background: var(--off-white);
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .page-header-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .page-header .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212, 175, 55, 0.12);
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+  }
+  
+  .page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+  }
+  
+  .page-header p {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  
+  /* Dashboard Card */
+  .dashboard-card {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px 28px;
+    background: var(--off-white);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .project-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .project-title i {
+    font-size: 1.5rem;
+    color: var(--accent-gold);
+  }
+  
+  .project-title h3 {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+  }
+  
+  .project-status {
+    background: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  #projectContent {
+    padding: 28px;
+  }
+  
+  .update-info {
+    margin-bottom: 24px;
+  }
+  
+  .update-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  .update-info p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  
+  .update-media {
+    background: var(--off-white);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 20px 0;
+  }
+  
+  .update-media h4 {
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+  }
+  
+  .media-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .media-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+  }
+  
+  .media-link:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+  }
+  
+  .media-link i:first-child {
+    color: var(--accent-gold);
+  }
+  
+  .inspection-section {
+    margin-top: 24px;
+  }
+  
+  .inspection-confirm {
+    margin-top: 16px;
+  }
+  
+  .alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-left: 3px solid var(--success);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    color: var(--success);
+  }
+  
+  /* Dashboard Grid */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  
+  .info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 24px;
+    background: var(--off-white);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .info-card-header i {
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+  }
+  
+  .info-card-header h3 {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+  
+  .info-card-content {
+    padding: 20px 24px;
+  }
+  
+  .alert-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .alert-item:last-child {
+    border-bottom: none;
+  }
+  
+  .alert-item i {
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+  }
+  
+  .alert-item span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .document-list {
+    margin-bottom: 16px;
+  }
+  
+  .document-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .document-item i {
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+  }
+  
+  /* Activity Card */
+  .activity-card {
+    background: var(--white);
+    border: 1px solid var(--light-gray);
+    border-radius: var(--radius-lg);
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  
+  .activity-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 24px;
+    background: var(--off-white);
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .activity-header i {
+    font-size: 1.2rem;
+    color: var(--accent-gold);
+  }
+  
+  .activity-header h3 {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+  
+  .activity-timeline {
+    padding: 20px 24px;
+  }
+  
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  
+  .timeline-item:last-child {
+    border-bottom: none;
+  }
+  
+  .timeline-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--off-white);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-gold);
+  }
+  
+  .timeline-content {
+    flex: 1;
+  }
+  
+  .timeline-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  
+  .timeline-action {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+  }
+  
+  /* Button Sizes */
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-header {
+      padding: 32px 0 24px;
+    }
+    
+    .page-header h1 {
+      font-size: 2rem;
+    }
+    
+    .project-header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+    }
+    
+    #projectContent {
+      padding: 20px;
+    }
+    
+    .media-links {
+      flex-direction: column;
+    }
+    
+    .media-link {
+      justify-content: space-between;
+    }
+    
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .timeline-item {
+      gap: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .page-header h1 {
+      font-size: 1.75rem;
+    }
+    
+    .page-header p {
+      font-size: 1rem;
+    }
+    
+    .info-card-header,
+    .info-card-content {
+      padding: 16px 20px;
+    }
+    
+    .activity-timeline {
+      padding: 16px 20px;
+    }
+  }
+</style>
+
+</body>
+</html>
