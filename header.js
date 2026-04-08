@@ -85,14 +85,7 @@ class GamTrustHeader {
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#about" class="bottom-nav-item">
-                    <i class="fas fa-info-circle"></i>
-                    <span>About</span>
-                </a>
-                <a href="#contact" class="bottom-nav-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>Contact</span>
-                </a>
+                
             </div>
         `;
 
@@ -125,8 +118,7 @@ class GamTrustHeader {
                                 <li><a href="index.html">Home</a></li>
                                 <li><a href="services.html">Services</a></li>
                                 <li><a href="client-hub.html">Client Hub</a></li>
-                                <li><a href="#about">About Us</a></li>
-                                <li><a href="#contact">Contact</a></li>
+
                             </ul>
                         </div>
                         
