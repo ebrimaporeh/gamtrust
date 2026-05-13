@@ -1,7 +1,8 @@
 import { Link, useLocation } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
-import { Menu, X, User, LogOut, Settings, ChevronDown, Shield, ArrowRight } from 'lucide-react'
+import { Menu, X, User, LogOut, Settings, ChevronDown, ArrowRight } from 'lucide-react'
 import { useAuthStore } from '@/stores/authStore'
+import gamtrustLogo from '/gamtrust-logo-nog-bg.png'
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -24,7 +25,6 @@ export const Header = () => {
     { path: '/sample-dashboard', label: 'Client Dashboard' },
     { path: '/projects', label: 'Projects' },
     { path: '/pricing', label: 'Pricing' },
-    // { path: '/reports', label: 'Reports' },
     ...(isAuthenticated ? [{ path: '/dashboard', label: 'Dashboard' }] : []),
   ]
 
@@ -44,15 +44,15 @@ export const Header = () => {
       <div className="container-brand">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded flex items-center justify-center shadow-md group-hover:scale-105 transition-transform bg-gold">
-              <Shield className="w-5 h-5 text-navy" />
-            </div>
-            <div>
-              <span className="text-xl font-display font-semibold text-navy">
-                Gam<span className="text-gold">Trust</span>
-              </span>
-              <p className="text-[0.65rem] hidden sm:block font-mono tracking-wide text-navy">
+          <Link to="/" className="flex items-center gap-3 group">
+            <img 
+              src={gamtrustLogo} 
+              alt="GamTrust Logo" 
+              className="h-15 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+            <div className="hidden sm:block">
+            
+              <p className="text-[0.65rem] font-mono tracking-wide text-navy/80">
                 Investment Protection
               </p>
             </div>
@@ -67,7 +67,7 @@ export const Header = () => {
                 className={`nav-link transition-colors duration-300 ${
                   isActive(link.path) 
                     ? 'text-navy after:bg-gold'
-                    : 'text-navy hover:text-navy'
+                    : 'text-navy hover:text-navy/80'
                 }`}
               >
                 {link.label}
@@ -125,12 +125,6 @@ export const Header = () => {
               </div>
             ) : (
               <div className="flex items-center gap-3">
-                {/* <Link
-                  to="/login"
-                  className="transition-colors text-sm font-medium tracking-wide text-navy hover:text-gold"
-                >
-                  Login
-                </Link> */}
                 <Link
                   to="/contact"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-sm font-semibold transition-all duration-300 bg-gold text-navy hover:bg-gold-light"
