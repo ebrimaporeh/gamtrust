@@ -98,7 +98,7 @@ export const ServicesPreview = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-xl font-medium text-navy mb-3 group-hover:text-white transition-colors">
+                <h3 className="font-display text-xl font-medium text-navy mb-3  transition-colors">
                   {service.title}
                 </h3>
 
