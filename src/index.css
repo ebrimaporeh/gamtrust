@@ -1,0 +1,533 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   GAMTRUST — Tailwind v4 Theme Configuration
+   Luxury trust-tech: deep navy × gold × cream
+───────────────────────────────────────────── */
+
+@theme {
+  /* ── Brand Colors ── */
+  --color-navy:         #0D1B2A;
+  --color-navy-mid:     #132338;
+  --color-navy-light:   #1C3150;
+  --color-gold:         #C9A84C;
+  --color-gold-light:   #E2C97E;
+  --color-gold-pale:    #F5EDD6;
+  --color-cream:        #F8F4EC;
+  --color-slate:        #6B7A8D;
+  --color-slate-light:  #A8B4C2;
+  --color-ink:          #08111C;
+
+  /* ── Typography ── */
+  --font-display:  "Cormorant Garamond", Georgia, serif;
+  --font-sans:     "DM Sans", system-ui, sans-serif;
+  --font-mono:     "DM Mono", "Fira Mono", monospace;
+
+  /* ── Font Sizes ── */
+  --font-size-hero:    clamp(3rem, 6vw, 5.5rem);
+  --font-size-section: clamp(2.2rem, 4vw, 3.6rem);
+  --font-size-card:    clamp(1.4rem, 2.5vw, 1.9rem);
+  --font-size-label:   0.72rem;
+  --font-size-body-sm: 0.83rem;
+
+  /* ── Spacing Scale ── */
+  --spacing-section: 100px;
+  --spacing-card:    40px;
+
+  /* ── Border Radius ── */
+  --radius-sm:  4px;
+  --radius-md:  10px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 2px 12px rgb(13 27 42 / 0.08);
+  --shadow-md:  0 8px 32px rgb(13 27 42 / 0.14);
+  --shadow-lg:  0 24px 64px rgb(13 27 42 / 0.20);
+  --shadow-gold: 0 8px 24px rgb(201 168 76 / 0.25);
+
+  /* ── Transitions ── */
+  --ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-base: 350ms;
+  --transition-base: all var(--duration-base) var(--ease-brand);
+
+  /* ── Z-Index ── */
+  --z-nav:    100;
+  --z-mobile: 99;
+  --z-modal:  200;
+}
+
+/* ─────────────────────────────────────────────
+   BASE RESETS & GLOBALS
+───────────────────────────────────────────── */
+
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-navy);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--color-cream); }
+::-webkit-scrollbar-thumb  { background: var(--color-gold); border-radius: 2px; }
+
+/* ── Typography Defaults ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--font-size-hero);    font-weight: 300; }
+h2 { font-size: var(--font-size-section); font-weight: 300; }
+h3 { font-size: var(--font-size-card);    font-weight: 400; }
+h4 { font-size: 1.15rem;                 font-weight: 500; }
+
+p {
+  line-height: 1.75;
+  color: var(--color-slate);
+  font-weight: 300;
+}
+
+a { transition: var(--transition-base); }
+
+/* ─────────────────────────────────────────────
+   TAILWIND v4 CUSTOM UTILITIES (@utility)
+───────────────────────────────────────────── */
+
+/* Text styles */
+@utility text-display {
+  font-family: var(--font-display);
+}
+
+@utility text-mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+@utility text-hero {
+  font-size: var(--font-size-hero);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+@utility text-section-heading {
+  font-size: var(--font-size-section);
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Section wrappers */
+@utility section-base {
+  padding: var(--spacing-section) 0;
+}
+
+@utility section-dark {
+  background-color: var(--color-navy);
+  color: white;
+}
+
+@utility section-mid {
+  background-color: var(--color-navy-mid);
+  color: white;
+}
+
+/* Container */
+@utility container-brand {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* Gold divider */
+@utility divider-gold {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+  display: block;
+}
+
+/* Section label */
+@utility section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* Border variants */
+@utility border-gold {
+  border-color: rgb(201 168 76 / 0.18);
+}
+
+@utility border-gold-solid {
+  border-color: var(--color-gold);
+}
+
+/* Background variants */
+@utility bg-gold-faint {
+  background-color: rgb(201 168 76 / 0.08);
+}
+
+@utility bg-gold-subtle {
+  background-color: rgb(201 168 76 / 0.1);
+}
+
+@utility bg-white-faint {
+  background-color: rgb(255 255 255 / 0.04);
+}
+
+@utility bg-white-subtle {
+  background-color: rgb(255 255 255 / 0.07);
+}
+
+/* Shadow variants */
+@utility shadow-brand-sm { box-shadow: var(--shadow-sm); }
+@utility shadow-brand-md { box-shadow: var(--shadow-md); }
+@utility shadow-brand-lg { box-shadow: var(--shadow-lg); }
+@utility shadow-gold     { box-shadow: var(--shadow-gold); }
+
+/* ─────────────────────────────────────────────
+   BUTTON COMPONENTS (@layer components)
+───────────────────────────────────────────── */
+
+@layer components {
+  /* Primary — gold fill */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-gold);
+    color: var(--color-navy);
+    padding: 14px 28px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: var(--transition-base);
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover {
+    background: var(--color-gold-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+  }
+
+  /* Outline — ghost on dark */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: white;
+    padding: 14px 28px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: var(--transition-base);
+    cursor: pointer;
+  }
+  .btn-outline:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    background: rgb(201 168 76 / 0.05);
+  }
+
+  /* Nav CTA */
+  .btn-nav {
+    background: var(--color-gold);
+    color: var(--color-navy) !important;
+    padding: 9px 22px;
+    border-radius: var(--radius-sm);
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    font-size: 0.83rem;
+    text-decoration: none;
+    transition: var(--transition-base);
+  }
+  .btn-nav:hover {
+    background: var(--color-gold-light) !important;
+  }
+
+  /* Pricing plans */
+  .btn-plan-default {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    padding: 13px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgb(13 27 42 / 0.2);
+    background: transparent;
+    color: var(--color-navy);
+    font-weight: 600;
+    font-size: 0.87rem;
+    letter-spacing: 0.04em;
+    transition: var(--transition-base);
+  }
+  .btn-plan-default:hover {
+    background: var(--color-navy);
+    color: white;
+  }
+
+  .btn-plan-popular {
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    background: var(--color-gold);
+    color: var(--color-navy);
+    padding: 13px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.87rem;
+    letter-spacing: 0.04em;
+    transition: var(--transition-base);
+  }
+  .btn-plan-popular:hover {
+    background: var(--color-gold-light);
+  }
+}
+
+/* ─────────────────────────────────────────────
+   HERO SECTION SPECIFIC STYLES
+───────────────────────────────────────────── */
+
+/* Hero Background Grid */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(var(--color-gold) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-gold) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.hero-radial-bg {
+  background:
+    radial-gradient(ellipse 80% 70% at 70% 50%, rgb(201 168 76 / 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 10% 90%, rgb(28 49 80 / 0.8) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Hero Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgb(201 168 76 / 0.1);
+  border: 1px solid rgb(201 168 76 / 0.18);
+  padding: 7px 16px;
+  border-radius: 2px;
+}
+
+/* Badge Dot with Pulse */
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  position: relative;
+}
+
+.badge-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Hero Progress Card */
+.hero-progress-card {
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(201 168 76 / 0.15);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Progress Bar */
+.progress-bar-track {
+  height: 4px;
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  border-radius: 2px;
+}
+
+/* Pricing plan buttons */
+.btn-plan-default {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 13px;
+  border-radius: 4px;
+  border: 1px solid rgba(13, 27, 42, 0.2);
+  background: transparent;
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: 0.87rem;
+  letter-spacing: 0.04em;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-plan-default:hover {
+  background: var(--color-navy);
+  color: white;
+}
+
+.btn-plan-popular {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  background: var(--color-gold);
+  color: var(--color-navy);
+  padding: 13px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.87rem;
+  letter-spacing: 0.04em;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-plan-popular:hover {
+  background: var(--color-gold-light);
+}
+
+/* Animation for mobile menu */
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-down {
+  animation: fade-down 0.3s ease-out;
+}
+
+/* ─────────────────────────────────────────────
+   KEYFRAME ANIMATIONS
+───────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* Animation Utility Classes */
+@layer utilities {
+  .animate-fade-up     { animation: fadeUp     0.7s var(--ease-brand) forwards; }
+  .animate-fade-in     { animation: fadeIn     0.5s ease forwards; }
+  .animate-shimmer     { animation: shimmer    2s ease-in-out infinite; }
+  .animate-pulse-ring  { animation: pulse-ring 2s ease-out infinite; }
+  .animate-marquee     { animation: marquee    30s linear infinite; }
+  .animate-float       { animation: float      4s ease-in-out infinite; }
+}
+
+/* ─────────────────────────────────────────────
+   SCROLL REVEAL ANIMATION
+───────────────────────────────────────────── */
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE OVERRIDES
+───────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .container-brand { 
+    padding-left: 24px; 
+    padding-right: 24px; 
+  }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
