@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock, ArrowUp, Heart } from 'lucide-react'
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import gamtrustLogo from '/gamtrust-logo.png'
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -32,8 +33,8 @@ export const Footer = () => {
   const quickLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
-    { path: '/client-hub', label: 'Client Hub' },
-    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/clients', label: 'Clients' },
+    { path: '/pricing', label: 'Pricing' },
   ]
 
   const serviceAreas = [
@@ -88,13 +89,18 @@ export const Footer = () => {
           >
             {/* Brand Section */}
             <motion.div variants={itemVariants}>
-              <Link to="/" className="inline-flex items-center gap-2 mb-4 group">
-                <div className="w-10 h-10 rounded bg-gold flex items-center justify-center transition-all duration-300 group-hover:scale-105">
-                  <span className="font-mono font-bold text-xs text-navy">GT</span>
+              <Link to="/" className="inline-flex items-center gap-3 mb-4 group">
+                <img 
+                  src={gamtrustLogo} 
+                  alt="GamTrust Logo" 
+                  className="h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                />
+                <div className="hidden sm:block">
+                 
+                  <p className="text-[0.65rem] font-mono tracking-wide text-slate-light/80">
+                    Investment Protection
+                  </p>
                 </div>
-                <span className="font-display text-xl font-semibold text-white">
-                  Gam<span className="text-gold">Trust</span>
-                </span>
               </Link>
 
               <p className="text-sm mb-4 leading-relaxed text-slate-light">
