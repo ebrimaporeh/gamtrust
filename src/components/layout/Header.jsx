@@ -66,7 +66,7 @@ export const Header = () => {
                 to={link.path}
                 className={`nav-link transition-colors duration-300 ${
                   isActive(link.path) 
-                    ? 'text-navy after:bg-gold'
+                    ? 'text-gold after:bg-gold'
                     : 'text-navy hover:text-navy/80'
                 }`}
               >
